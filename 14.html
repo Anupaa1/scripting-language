@@ -4,28 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-</head>
-<body>
-    <h1>Sort Array Elements</h1>
-    <label for="userInput">Enter array elements (comma separated):</label><br>
-    <input type="text" id="userInput" placeholder="e.g., 3, 8, 7, 6, 5"><br><br>
-    <button onclick="sortArray()">Sort</button>
-    <p id="result"></p>
-
     <script>
-        function sortArray() {
-            
-            const userInput = document.getElementById('userInput').value;
-            
-            
-            const arr = userInput.split(',').map(item => parseFloat(item.trim()));
+        function fetchCities() {
+            const country = document.getElementById('country').value;
+            const cityDropdown = document.getElementById('city');
 
-            
-            arr.sort((a, b) => a - b);
+            // Clear the city dropdown
+            cityDropdown.innerHTML = '<option value="">Select City</option>';
 
-           
-            document.getElementById('result').textContent = `Sorted Array: ${arr.join(', ')}`;
+            if (country === "") {
+                return;
+            }
+
+            // Create XMLHttpRequest object
+            const xhr = new XMLHttpRequest();
+
+            // Define what to do when response is received
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const cities = JSON.parse(xhr.responseText);
+
+                    // Populate city dropdown
+                    cities.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city;
+                        option.textContent = city;
+                        cityDropdown.appendChild(option);
+                    });
+                }
+            };
+
+            // Open and send the request
+            xhr.open('GET', 'get_cities.php?country=' + encodeURIComponent(country), true);
+            xhr.send();
         }
     </script>
+</head>
+<body>
+    <h1>Country and City Dropdown</h1>
+    <form>
+        <label for="country">Country:</label>
+        <select id="country" name="country" onchange="fetchCities()">
+            <option value="">Select Country</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="India">India</option>
+        </select>
+
+        <br><br>
+
+        <label for="city">City:</label>
+        <select id="city" name="city">
+            <option value="">Select City</option>
+        </select>
+    </form>
+
+    <?php
+    if (isset($_GET['country'])) {
+        $country = $_GET['country'];
+        $cities = [];
+
+        switch ($country) {
+            case 'USA':
+                $cities = ['New York', 'Los Angeles', 'Chicago'];
+                break;
+            case 'Canada':
+                $cities = ['Toronto', 'Vancouver', 'Montreal'];
+                break;
+            case 'India':
+                $cities = ['Delhi', 'Mumbai', 'Bangalore'];
+                break;
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($cities);
+    }
+    ?>
 </body>
 </html>

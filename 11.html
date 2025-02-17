@@ -4,20 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #loadContentButton {
+            display: block;
+            width: 200px;
+            height: 40px;
+            margin: 30px auto;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        #loadContentButton:hover {
+            background-color: #45a049;
+        }
+
+        #content {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Enter Numbers (comma separated)</h1>
-    <input type="text" id="numbers" placeholder="e.g., 3, 5, 7, 2">
-    <button onclick="findSmallest()">Find Smallest</button>
-    <p id="result"></p>
+
+    <div class="container">
+        <h1>Welcome to BCA Information</h1>
+
+        <!-- Button to load the content -->
+        <button id="loadContentButton">Load BCA Information</button>
+
+        <!-- Container to display the content from bca.txt -->
+        <div id="content">Click the button to load BCA information.</div>
+    </div>
 
     <script>
-        function findSmallest() {
-            const input = document.getElementById('numbers').value;
-            const numbers = input.split(',').map(num => parseInt(num.trim()));
-            const smallest = Math.min(...numbers);
-            document.getElementById('result').textContent = `The smallest number is: ${smallest}`;
-        }
+        // This will run when the page is loaded
+        document.getElementById('loadContentButton').addEventListener('click', function() {
+            // Create an AJAX request
+            var xhr = new XMLHttpRequest();
+            
+            // Specify the request type and the URL (bca.txt should be in the same directory)
+            xhr.open('GET', 'bca.txt', true);
+            
+            // Set up what happens when the response is received
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Display the content of the bca.txt file in the content div
+                    document.getElementById('content').innerHTML = xhr.responseText;
+                } else {
+                    // If there was an error, display an error message
+                    document.getElementById('content').innerHTML = 'Error loading content.';
+                }
+            };
+
+            // Send the request to the server
+            xhr.send();
+        });
     </script>
+
 </body>
 </html>
