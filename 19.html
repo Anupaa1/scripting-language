@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+</head>
+<body>
+  <h1>Calculate Age</h1>
+  <form id="ageForm">
+    <label for="birthdate">Enter your birthdate: </label>
+    <input type="date" id="birthdate" required>
+    <button type="submit">Calculate Age</button>
+  </form>
+
+  <p id="ageResult"></p>
+
+  <script>
+    document.getElementById('ageForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const birthdate = document.getElementById('birthdate').value;
+      const age = calculateAge(birthdate);
+      document.getElementById('ageResult').textContent = `Your age is: ${age} years`;
+    });
+
+    function calculateAge(birthdate) {
+      const birthYear = new Date(birthdate).getFullYear();
+      const currentYear = new Date().getFullYear();
+      return currentYear - birthYear;
+    }
+  </script>
+</body>
+</html>

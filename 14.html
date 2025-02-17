@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+    <h1>Sort Array Elements</h1>
+    <label for="userInput">Enter array elements (comma separated):</label><br>
+    <input type="text" id="userInput" placeholder="e.g., 3, 8, 7, 6, 5"><br><br>
+    <button onclick="sortArray()">Sort</button>
+    <p id="result"></p>
+
+    <script>
+        function sortArray() {
+            
+            const userInput = document.getElementById('userInput').value;
+            
+            
+            const arr = userInput.split(',').map(item => parseFloat(item.trim()));
+
+            
+            arr.sort((a, b) => a - b);
+
+           
+            document.getElementById('result').textContent = `Sorted Array: ${arr.join(', ')}`;
+        }
+    </script>
+</body>
+</html>

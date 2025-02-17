@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .number {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .even {
+            background-color: green;
+        }
+
+        .odd {
+            background-color: yellow;
+            color: black;
+        }
+
+        .prime {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Numbers from 0 to 100</h1>
+    <div class="container" id="numberContainer"></div>
+
+    <script>
+        
+        function isPrime(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+        function generateNumbers() {
+            const container = document.getElementById('numberContainer');
+            
+            for (let i = 0; i <= 100; i++) {
+                const numberDiv = document.createElement('div');
+                numberDiv.classList.add('number');
+                numberDiv.textContent = i;
+
+                if (isPrime(i)) {
+                    numberDiv.classList.add('prime');
+                } else if (i % 2 === 0) {
+                    numberDiv.classList.add('even');
+                } else {
+                    numberDiv.classList.add('odd');
+                }
+
+                container.appendChild(numberDiv);
+            }
+        }
+        generateNumbers();
+    </script>
+
+</body>
+</html>

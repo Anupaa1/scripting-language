@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            padding: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+        }
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Capitalize First Letter of Each Word</h1>
+    
+    
+    <input type="text" id="inputString" placeholder="Enter a string" />
+    <button onclick="processString()">Capitalize</button>
+
+    <div id="output"></div>
+
+    <script>
+       
+        function capitalizeFirstLetter(str) {
+            return str.split(' ')
+                      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                      .join(' ');
+        }
+
+        
+        function processString() {
+            const inputString = document.getElementById('inputString').value;  
+            const result = capitalizeFirstLetter(inputString);  
+            document.getElementById('output').textContent = result;  
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+</head>
+<body>
+    <h1>Check if Input is an Array</h1>
+    <input type="text" id="inputValue" placeholder="Enter an array or string">
+    <button onclick="checkArray()">Check</button>
+    <p id="result"></p>
+
+    <script>
+        function checkArray() {
+           
+            const inputValue = document.getElementById('inputValue').value;
+            let resultMessage = '';
+            
+            
+            try {
+                const parsedInput = JSON.parse(inputValue);
+                if (Array.isArray(parsedInput)) {
+                    resultMessage = "This is an array!";
+                } else {
+                    resultMessage = "This is not an array.";
+                }
+            } catch (e) {
+                resultMessage = "Invalid input. Please enter a valid array in JSON format.";
+            }
+            
+           
+            document.getElementById('result').textContent = resultMessage;
+        }
+    </script>
+</body>
+</html>
+

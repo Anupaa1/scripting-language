@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .wrapper {
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            margin: 5px;
+            font-size: 18px;
+        }
+
+        #year {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .completed {
+            background-color: green;
+            color: white;
+        }
+
+        .ongoing {
+            background-color: yellow;
+            color: black;
+        }
+
+        .coming {
+            background-color: red;
+            color: white;
+        }
+
+        #date-time {
+            padding: 10px;
+            font-size: 18px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <h1>Asabeneh Yetayeh challenges in 2020</h1>
+        <h2>30DaysOfJavaScript Challenge</h2>
+        
+        <div id="year">2020</div>
+        
+        <ul>
+            <li class="completed">Python Challenge Done</li>
+            <li class="ongoing">JavaScript Challenge Ongoing</li>
+            <li class="coming">React Challenge Coming</li>
+            <li class="coming">FullStack Challenge Coming</li>
+            <li class="coming">DataAnalysis Challenge Coming</li>
+            <li class="coming">ReactNative Challenge Coming</li>
+            <li class="coming">MachineLearning Challenge Coming</li>
+        </ul>
+
+        <div id="date-time">Current Date and Time: </div>
+    </div>
+
+    <script>
+        // Function to change the year color every 1 second
+        setInterval(function() {
+            const yearElement = document.getElementById('year');
+            const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            yearElement.style.color = randomColor;
+        }, 1000);
+
+        // Function to change the date and time background color every 1 second
+        setInterval(function() {
+            const dateTimeElement = document.getElementById('date-time');
+            const randomBgColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            dateTimeElement.style.backgroundColor = randomBgColor;
+            // Update current date and time
+            const now = new Date();
+            dateTimeElement.textContent = `Current Date and Time: ${now.toLocaleString()}`;
+        }, 1000);
+
+        // Function to style challenge items based on their status
+        function styleChallenges() {
+            const listItems = document.querySelectorAll('ul li');
+
+            listItems.forEach(item => {
+                if (item.classList.contains('completed')) {
+                    item.classList.add('completed');
+                } else if (item.classList.contains('ongoing')) {
+                    item.classList.add('ongoing');
+                } else if (item.classList.contains('coming')) {
+                    item.classList.add('coming');
+                }
+            });
+        }
+
+        // Apply the styles for the challenges
+        styleChallenges();
+    </script>
+
+</body>
+</html>

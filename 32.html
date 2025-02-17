@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        input {
+            font-size: 24px;
+            padding: 10px;
+            width: 100px;
+            text-align: center;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: #e0f7fa;
+        }
+
+        button {
+            padding: 15px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 100px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        /* Style for reset button to place below the input */
+        #resetButton {
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Counter App</h1>
+
+    <div class="container">
+        <div>
+            <button onclick="decrement()">-</button>
+            <input type="number" id="numberInput" value="0" />
+            <button onclick="increment()">+</button>
+        </div>
+        <button id="resetButton" onclick="reset()">Reset</button>
+    </div>
+
+    <script>
+        let originalValue = 0; // Store the original value for reset
+
+        // Function to increment the number by 1
+        function increment() {
+            let currentValue = parseInt(document.getElementById('numberInput').value);
+            currentValue += 1;
+            document.getElementById('numberInput').value = currentValue;
+        }
+
+        // Function to decrement the number by 1
+        function decrement() {
+            let currentValue = parseInt(document.getElementById('numberInput').value);
+            currentValue -= 1;
+            document.getElementById('numberInput').value = currentValue;
+        }
+
+        // Function to reset the number to the original value
+        function reset() {
+            document.getElementById('numberInput').value = originalValue;
+        }
+
+        // Update the original value when the user types in the input
+        document.getElementById('numberInput').addEventListener('input', function() {
+            originalValue = parseInt(this.value);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+
+        #content {
+            width: 70%;
+            margin: 20px auto;
+            font-size: 12pt;
+        }
+
+        #options{
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            gap: 0; /* No gap between buttons */
+            padding: 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0; /* Remove margin between buttons */
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+        #q{
+            background-color: rgb(69, 69, 226);
+        }
+        #w{
+            background-color: rgb(231, 167, 48);
+        }
+        #e{
+            background-color: rgb(226, 25, 25);
+        }
+        #r{
+            background-color: rgb(169, 233, 42);
+        }
+        #t{
+            background-color: rgb(36, 207, 59);
+        }
+        #y{
+            background-color: rgb(109, 36, 161);
+        }
+        #u{
+            background-color: rgb(243, 60, 91);
+        }
+        #i{
+            background-color: rgb(17, 141, 141);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="options">
+        <button id="q" onclick="changeBackground()">Change Background</button>
+        <button id="w" onclick="changeParagraphBackground()">Change Paragraph Background</button>
+        <button id="e" onclick="hideParagraph()">Hide Paragraph</button>
+        <button id="r"onclick="showParagraph()">Show Paragraph</button>
+        <button id="t" onclick="increaseFontSize()">Increase Font Size by 2pt</button>
+        <button id="y" onclick="decreaseFontSize()">Decrease Font Size by 2pt</button>
+        <button id="u" onclick="resetFontSize()">Reset Font Size to 12pt</button>
+        <button id="i" onclick="changeTextColor()">Change Text Color</button>
+    </div>
+
+    <div id="content">
+        <p id="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi accusamus voluptatibus omnis, in laborum consectetur consequuntur iusto excepturi modi natus ratione, fuga, iure itaque similique quos officia voluptatem et. Rem.</p>
+    </div>
+
+    <script>
+        
+        function changeBackground() {
+            document.body.style.backgroundColor = 'lightblue';
+        }
+
+       
+        function changeParagraphBackground() {
+            document.getElementById('paragraph').style.backgroundColor = 'lightgreen';
+        }
+
+       
+        function hideParagraph() {
+            document.getElementById('paragraph').classList.add('hidden');
+        }
+
+       
+        function showParagraph() {
+            document.getElementById('paragraph').classList.remove('hidden');
+        }
+
+       
+        function increaseFontSize() {
+            let paragraph = document.getElementById('paragraph');
+            let currentFontSize = parseInt(window.getComputedStyle(paragraph).fontSize);
+            paragraph.style.fontSize = (currentFontSize + 2) + 'pt';
+        }
+
+       
+        function decreaseFontSize() {
+            let paragraph = document.getElementById('paragraph');
+            let currentFontSize = parseInt(window.getComputedStyle(paragraph).fontSize); 
+            paragraph.style.fontSize = (currentFontSize - 2) + 'px';
+        }
+
+
+        
+        function resetFontSize() {
+            document.getElementById('paragraph').style.fontSize = '12pt';
+        }
+
+        
+        function changeTextColor() {
+            document.getElementById('paragraph').style.color = 'indigo';
+        }
+    </script>
+
+</body>
+</html>

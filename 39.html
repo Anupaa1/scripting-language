@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <style>
+    html{
+    background: linear-gradient(to right, rgb(138, 196, 250), rgb(133, 247, 133));
+    display: flex;
+    justify-content: center; /* display flex garesi tyo flex ko content lai centre ma justify gareko*/
+    align-items: center; /* mathy ko le top ko  bich ma aauxa, yele box vari ko bich ma aauxa*/
+    padding-top:130px;
+    
+}
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+body{
+    
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 4px 4px 10px 5px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 450px;
+}
+label {
+    
+    display: block;
+}
+input,select {
+    padding: 4px;
+    border: 1px solid rgb(196, 193, 193);
+    border-radius: 4px;
+    font-size: 14px;
+}
+input:focus {
+    outline: none; /* focus huda aafai aauni black hatxa*/
+    border-color: rgb(11, 155, 11); 
+}
+input::placeholder {
+    font-size: 12px;
+    color: rgb(187, 183, 183);
+}
+button {
+    padding: 8px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: rgb(37, 214, 61) ;
+    margin:8px;
+    }
+button:hover {
+    opacity: 0.9;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+.error {
+            color: red;
+            font-size: 12px;
+        }
+
+        .success {
+            color: green;
+            font-size: 14px;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <h2>Registration Form</h2>
+
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <div id="nameError" class="error"></div>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address"></textarea>
+        <div id="addressError" class="error"></div>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <div id="usernameError" class="error"></div>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <div id="emailError" class="error"></div>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <div id="passwordError" class="error"></div>
+
+        <label for="website">Website:</label>
+        <input type="texr" id="website" name="website">
+        <div id="websiteError" class="error"></div>
+
+
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="male"> Male
+        <input type="radio" id="female" name="gender" value="female"> Female
+        <div id="genderError" class="error"></div>
+
+        <label for="course">Course:</label>
+        <select id="course" name="course">
+            <option value="">Select a course</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="Python">Python</option>
+            <option value="Java">Java</option>
+        </select>
+        <div id="courseError" class="error"></div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="successMessage" class="success"></div>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            
+            clearErrors();
+
+            
+            const name = document.getElementById("name").value;
+            const nameError = document.getElementById("nameError");
+            if (!name) {
+                nameError.textContent = "Name is required.";
+                isValid = false;
+            } else if (/\d/.test(name)) {
+                nameError.textContent = "Name cannot contain numbers.";
+                isValid = false;
+            }
+
+           
+            const address = document.getElementById("address").value;
+            const addressError = document.getElementById("addressError");
+            if (!address) {
+                addressError.textContent = "Address is required.";
+                isValid = false;
+            }
+
+            
+            const username = document.getElementById("username").value;
+            const usernameError = document.getElementById("usernameError");
+            if (!username) {
+                usernameError.textContent = "Username is required.";
+                isValid = false;
+            } else if (/\s|[^a-zA-Z0-9_]/.test(username)) {
+                usernameError.textContent = "Username cannot contain spaces or special characters (except _).";
+                isValid = false;
+            }
+
+            
+            const email = document.getElementById("email").value;
+            const emailError = document.getElementById("emailError");
+            if (!email) {
+                emailError.textContent = "Email is required.";
+                isValid = false;
+            } else if (!email.includes("@")) {
+                emailError.textContent = "Please enter a valid email address.";
+                isValid = false;
+            }
+
+           
+            const password = document.getElementById("password").value;
+            const passwordError = document.getElementById("passwordError");
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+            if (!password) {
+                passwordError.textContent = "Password is required.";
+                isValid = false;
+            } else if (!passwordRegex.test(password)) {
+                passwordError.textContent = "Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a digit, and a special character.";
+                isValid = false;
+            }
+
+           
+            const website = document.getElementById("website").value;
+            const websiteError = document.getElementById("websiteError");
+            if (website && !/^https?:\/\/[^\s]+$/.test(website)) {
+                websiteError.textContent = "Please enter a valid website URL.";
+                isValid = false;
+            }
+
+           
+            
+
+            
+            const genderError = document.getElementById("genderError");
+            if (!document.querySelector('input[name="gender"]:checked')) {
+                genderError.textContent = "Gender is required.";
+                isValid = false;
+            }
+
+           
+            const course = document.getElementById("course").value;
+            const courseError = document.getElementById("courseError");
+            if (!course) {
+                courseError.textContent = "Please select a course.";
+                isValid = false;
+            }
+
+            
+            if (isValid) {
+                document.getElementById("successMessage").textContent = "Form submitted successfully!";
+                return true;
+            }
+
+            return false;
+        }
+
+        function clearErrors() {
+            const errors = document.querySelectorAll(".error");
+            errors.forEach(error => error.textContent = "");
+            document.getElementById("successMessage").textContent = "";
+        }
+    </script>
+</body>
+</html>

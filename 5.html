@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <style>
+        body {
+        
+            padding: 20px;
+        }
+        .output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Current Date Formats</h1>
+    
+    <div class="output">
+        <p>MM-DD-YYYY format:      <span id="date1"></span></p>
+        <p>MM/DD/YYYY format:      <span id="date2"></span></p>
+        <p>DD-MM-YYYY format:      <span id="date3"></span></p>
+        <p>DD/MM/YYYY format:      <span id="date4"></span></p>
+        <p>YYYY Month Day format:   <span id="date5"></span></p>
+    </div>
+
+    <script>
+        
+        const currentDate = new Date();
+
+        
+        const day = currentDate.getDate();
+        const month = currentDate.getMonth() + 1; 
+        const year = currentDate.getFullYear();
+        const monthName = currentDate.toLocaleString('default', { month: 'long' });
+        const weekday = currentDate.toLocaleString('default', { weekday: 'long' });
+
+   
+        const date1 = `${pad(month)}-${pad(day)}-${year}`;  
+        const date2 = `${pad(month)}/${pad(day)}/${year}`; 
+        const date3 = `${pad(day)}-${pad(month)}-${year}`;  
+        const date4 = `${pad(day)}/${pad(month)}/${year}`;  
+        const date5 = `${year} ${monthName} ${day} ${weekday}`; 
+
+       
+        function pad(num) {
+            return num < 10 ? '0' + num : num;
+        }
+
+        
+        document.getElementById('date1').textContent = date1;
+        document.getElementById('date2').textContent = date2;
+        document.getElementById('date3').textContent = date3;
+        document.getElementById('date4').textContent = date4;
+        document.getElementById('date5').textContent = date5;
+    </script>
+</body>
+</html>

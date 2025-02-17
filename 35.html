@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+  <style>
+    /* Basic Styling for the Clock */
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to right, rgb(240, 105, 233), rgb(73, 3, 129));
+      font-family: 'Arial', sans-serif;
+    }
+
+    h1 {
+      font-size: 38px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 20px; /* Add space between the title and clock */
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .clock {
+      display: flex;
+      font-size: 50px;
+      color: black;
+      font-weight: bold;
+      padding: 10px;
+    }
+
+    .time-part {
+      display: flex;
+      margin: 0 5px;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 80px;
+      background-color: white;
+      border-radius: 8px;
+      font-size: 40px;
+    }
+
+    .colon {
+        color: white;
+      display: flex;
+      margin: 0 5px;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 80px;
+      font-size: 50px;
+    }
+   
+  </style>
+</head>
+<body>
+
+    <h1>DIGITAL CLOCK</h1>
+  <div class="clock">
+    <div class="time-part" id="hours">00</div>
+    <div class="colon">:</div>
+    <div class="time-part" id="minutes">00</div>
+    <div class="colon">:</div>
+    <div class="time-part" id="seconds">00</div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      
+      // Get hours, minutes, and seconds
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+
+      // Update the text content of each part
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+
+    // Update the clock every second
+    setInterval(updateClock, 1000);
+
+    // Initialize the clock
+    updateClock();
+  </script>
+</body>
+</html>

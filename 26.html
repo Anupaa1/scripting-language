@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+</head>
+<body>
+
+  <h2>Find the Ten Most Frequent Words in a String</h2>
+
+  
+  <textarea id="userInput" rows="8" cols="60" placeholder="Enter your text here..."></textarea><br><br>
+
+  
+  <button onclick="tenMostFrequentWords()">Get 10 Most Frequent Words</button>
+
+ 
+  <h3>Most Frequent Words:</h3>
+  <ul id="resultList"></ul>
+
+  <script>
+    
+    function tenMostFrequentWords() {
+      const inputText = document.getElementById("userInput").value;
+
+      
+      const words = inputText.toLowerCase().replace(/[^a-zA-Z\s]/g, '').split(/\s+/);
+
+      // Create a frequency map for words
+      const frequencyMap = {};
+
+      words.forEach(word => {
+        if (word) {  
+          frequencyMap[word] = (frequencyMap[word] || 0) + 1;
+        }
+      });
+
+      
+      const wordFrequencyArray = Object.entries(frequencyMap);
+
+      
+      wordFrequencyArray.sort((a, b) => b[1] - a[1]);
+
+      const topTenWords = wordFrequencyArray.slice(0, 10);
+
+      const resultList = document.getElementById("resultList");
+      resultList.innerHTML = ""; 
+
+      topTenWords.forEach(([word, frequency]) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${word}: ${frequency}`;
+        resultList.appendChild(listItem);
+      });
+    }
+  </script>
+
+</body>
+</html>

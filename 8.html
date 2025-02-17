@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+    <h1>Enter Two Integers</h1>
+    <input type="number" id="num1" placeholder="Enter first integer">
+    <input type="number" id="num2" placeholder="Enter second integer">
+    <button onclick="findLargerSmaller()">Find</button>
+    <p id="result"></p>
+
+    <script>
+        function findLargerSmaller() {
+            const num1 = parseInt(document.getElementById('num1').value);
+            const num2 = parseInt(document.getElementById('num2').value);
+            const larger = Math.max(num1, num2);
+            const smaller = Math.min(num1, num2);
+            document.getElementById('result').textContent = `Larger: ${larger}, Smaller: ${smaller}`;
+        }
+    </script>
+</body>
+</html>

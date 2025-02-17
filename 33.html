@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .calculator input {
+            width: 70%;
+            padding: 10px;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: right;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .calculator button {
+           
+            height: 50px;
+            font-size: 20px;
+            background-color: #4CAF50; 
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 2px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+        .calculator button:hover {
+            background-color: #45a049;
+        }
+        .calculator button:active {
+            background-color: #388e3c;
+        }
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .input-container {
+            display: flex;
+            align-items: center;
+        }
+        .clear {
+            width:90px;
+           
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <div class="input-container">
+            <input type="text" id="display" disabled>
+            <button class="clear" onclick="clearDisplay()">C</button>
+        </div>
+        <div class="button-container">
+            <button onclick="appendNumber(1)">1</button>
+            <button onclick="appendNumber(2)">2</button>
+            <button onclick="appendNumber(3)">3</button>
+            <button onclick="setOperation('+')">+</button>
+
+            <button onclick="appendNumber(4)">4</button>
+            <button onclick="appendNumber(5)">5</button>
+            <button onclick="appendNumber(6)">6</button>
+            <button onclick="setOperation('-')">-</button>
+
+            <button onclick="appendNumber(7)">7</button>
+            <button onclick="appendNumber(8)">8</button>
+            <button onclick="appendNumber(9)">9</button>
+            <button onclick="setOperation('*')">*</button>
+
+            <button onclick="appendNumber(0)">0</button>
+            <button class="decimal" onclick="appendDot()">.</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="setOperation('/')">/</button>
+        </div>
+    </div>
+
+    <script>
+        let currentInput = '';
+        let currentOperation = null;
+        let previousInput = '';
+        let decimalAdded = false;
+
+        function appendNumber(number) {
+            currentInput += number;
+            document.getElementById('display').value = currentInput;
+        }
+
+        function setOperation(operator) {
+            if (currentInput === '') return; 
+            if (previousInput !== '') {
+                calculateResult();
+            }
+            currentOperation = operator;
+            previousInput = currentInput;
+            currentInput = '';
+            decimalAdded = false; 
+        }
+
+        function calculateResult() {
+            let result;
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+            if (isNaN(prev) || isNaN(current)) return;
+
+            switch (currentOperation) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '-':
+                    result = prev - current;
+                    break;
+                case '*':
+                    result = prev * current;
+                    break;
+                case '/':
+                    if (current === 0) {
+                        result = 'Error';
+                    } else {
+                        result = prev / current;
+                    }
+                    break;
+                default:
+                    return;
+            }
+
+            currentInput = result.toString();
+            currentOperation = null;
+            previousInput = '';
+            decimalAdded = false;
+            document.getElementById('display').value = currentInput;
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            previousInput = '';
+            currentOperation = null;
+            decimalAdded = false;
+            document.getElementById('display').value = '';
+        }
+
+        function appendDot() {
+            if (!decimalAdded) {
+                currentInput += '.';
+                document.getElementById('display').value = currentInput;
+                decimalAdded = true;
+            }
+        }
+    </script>
+
+</body>
+</html>

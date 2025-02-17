@@ -1,0 +1,17 @@
+BCA (Bachelor of Computer Applications)
+
+The Bachelor of Computer Applications (BCA) is an undergraduate degree course in computer applications. It is designed to provide students with the knowledge and skills necessary to build and maintain software applications.
+
+Key Topics Covered:
+- Programming Languages (C, Java, Python, etc.)
+- Database Management Systems (DBMS)
+- Web Development (HTML, CSS, JavaScript)
+- Computer Networks and Security
+- Software Engineering and Project Management
+
+Career Opportunities:
+- Software Developer
+- Web Developer
+- System Analyst
+- IT Consultant
+- Data Scientist

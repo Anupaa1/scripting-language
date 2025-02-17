@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+</head>
+<body>
+
+    
+    <p id="first-paragraph">First Paragraph</p>
+    <p id="second-paragraph">Second Paragraph</p>
+    <p id="third-paragraph">Third Paragraph</p>
+    <p id="fourth-paragraph">Fourth Paragraph</p>
+
+    <script>
+        // a
+        const firstParagraph = document.querySelector('p');
+        console.log('First Paragraph:', firstParagraph.textContent);
+
+        // b
+        const firstById = document.querySelector('#first-paragraph');
+        const secondById = document.querySelector('#second-paragraph');
+        const thirdById = document.querySelector('#third-paragraph');
+        const fourthById = document.querySelector('#fourth-paragraph');
+        
+        console.log('First by ID:', firstById.textContent);
+        console.log('Second by ID:', secondById.textContent);
+        console.log('Third by ID:', thirdById.textContent);
+        console.log('Fourth by ID:', fourthById.textContent);
+
+        // c
+        const allParagraphs = document.querySelectorAll('p');
+        console.log('All Paragraphs NodeList:', allParagraphs);
+
+        // d
+        allParagraphs.forEach((p, index) => {
+            console.log(`Paragraph ${index + 1}: ${p.textContent}`);
+        });
+
+        // e
+        fourthById.textContent = 'Fourth Paragraph Updated';
+
+        // f
+        allParagraphs.forEach((p, index) => {
+            p.setAttribute('class', `class-paragraph-${index + 1}`);  
+            p.id = `updated-paragraph-${index + 1}`; 
+        });
+
+        // g
+        allParagraphs.forEach((p) => {
+            p.style.color = 'blue';
+            p.style.backgroundColor = 'lightgray';
+            p.style.border = '1px solid black';
+            p.style.fontSize = '16px';
+            p.style.fontFamily = 'Arial, sans-serif';
+        });
+
+        // h
+        allParagraphs.forEach((p, index) => {
+            if (index === 0 || index === 2) {
+                p.style.color = 'green';  
+            } else {
+                p.style.color = 'red';  
+            }
+        });
+
+        // i
+        allParagraphs.forEach((p, index) => {
+            p.textContent = `This is paragraph ${index + 1}`;
+            p.id = `final-paragraph-${index + 1}`; 
+            p.classList.add(`final-class-${index + 1}`); 
+        });
+
+    </script>
+
+</body>
+</html>

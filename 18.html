@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+</head>
+<body>
+  <h1>Calculate the Difference Between Two Dates</h1>
+
+  <form id="dateForm">
+    <label for="date1">Enter the first date (YYYY-MM-DD): </label>
+    <input type="date" id="date1" required><br><br>
+    <label for="date2">Enter the second date (YYYY-MM-DD): </label>
+    <input type="date" id="date2" required><br><br>
+    <button type="submit">Calculate Difference</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    // Function to calculate the difference in days between two dates
+    function dateDifference(date1, date2) {
+      const diffTime = Math.abs(new Date(date2) - new Date(date1));
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert time difference to days
+    }
+
+    // Event listener for the form submission
+    document.getElementById('dateForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form from refreshing the page
+
+      // Get values from the input fields
+      let date1 = document.getElementById('date1').value;
+      let date2 = document.getElementById('date2').value;
+
+      // Check if both dates are selected
+      if (date1 && date2) {
+        let difference = dateDifference(date1, date2);
+        document.getElementById('result').textContent = `The difference between the two dates is: ${difference} days.`;
+      } else {
+        document.getElementById('result').textContent = 'Please enter both dates.';
+      }
+    });
+  </script>
+</body>
+</html>
+

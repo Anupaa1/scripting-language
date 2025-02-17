@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+</head>
+<body>
+  <h1>Check if a String is Blank</h1>
+  
+  <form id="stringForm">
+    <label for="inputString">Enter a string: </label>
+    <input type="text" id="inputString" required><br><br>
+    <button type="submit">Check</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    
+    function isBlank(str) {
+      return str.trim() === ''; 
+    }
+
+    
+    document.getElementById('stringForm').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+
+      
+      let inputString = document.getElementById('inputString').value;
+
+      
+      let resultMessage = isBlank(inputString) ? "The string is blank." : "The string is not blank.";
+      document.getElementById('result').textContent = resultMessage;  // Display result on the page
+    });
+  </script>
+</body>
+</html>

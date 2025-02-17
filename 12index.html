@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        img {
+            max-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movies</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Poster</th>
+                <th>Year</th>
+                <th>Genre</th>
+                <th>Rating</th>
+                <th>Director</th>
+                <th>Country</th>
+                <th>Language</th>
+                <th>Actors</th>
+            </tr>
+        </thead>
+        <tbody id="movieTableBody">
+            <!-- Content will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Fetching data from the API
+        fetch('https://freetestapi.com/api/v1/movies')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('movieTableBody');
+                data.forEach(movie => {
+                    const row = document.createElement('tr');
+                    
+                    row.innerHTML = `
+                        <td>${movie.id}</td>
+                        <td>${movie.title}</td>
+                        <td><img src="${movie.poster}" alt="${movie.title} Poster"></td>
+                        <td>${movie.year}</td>
+                        <td>${movie.genre}</td>
+                        <td>${movie.rating}</td>
+                        <td>${movie.director}</td>
+                        <td>${movie.country}</td>
+                        <td>${movie.language}</td>
+                        <td>${movie.actors.join(', ')}</td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+</head>
+<body>
+  <h1>Get the Weekend Date for a Given Date</h1>
+  
+  <form id="dateForm">
+    <label for="inputDate">Enter a date (YYYY-MM-DD): </label>
+    <input type="date" id="inputDate" required>
+    <button type="submit">Find Weekend</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    
+    function getWeekendDate(date) {
+      const givenDate = new Date(date);
+      const dayOfWeek = givenDate.getDay(); 
+
+      
+      const daysUntilSaturday = (6 - dayOfWeek + 7) % 7;
+      givenDate.setDate(givenDate.getDate() + daysUntilSaturday);
+
+      return givenDate.toDateString();  
+    }
+
+    
+    document.getElementById('dateForm').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+      
+      const userDate = document.getElementById('inputDate').value;
+
+      
+      if (userDate) {
+        const weekend = getWeekendDate(userDate);
+        document.getElementById('result').textContent = `The next Saturday is: ${weekend}`;
+      } else {
+        document.getElementById('result').textContent = 'Please enter a valid date.';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+</head>
+<body>
+  <h1>Person Account</h1>
+
+  <script>
+    // Create an object literal called personAccount
+    const personAccount = {
+      // Properties
+      firstName: "Anupa",
+      lastName: "Kandel",
+      incomes: [
+        { amount: 1000, description: "Salary" },
+        { amount: 500, description: "Freelance Work" }
+      ],
+      expenses: [
+        { amount: 200, description: "Rent" },
+        { amount: 100, description: "Groceries" }
+      ],
+
+      // Method to calculate total income
+      totalIncome: function() {
+        return this.incomes.reduce((total, income) => total + income.amount, 0);
+      },
+
+      // Method to calculate total expenses
+      totalExpense: function() {
+        return this.expenses.reduce((total, expense) => total + expense.amount, 0);
+      },
+
+      // Method to get account info
+      accountInfo: function() {
+        return `Account Holder: ${this.firstName} ${this.lastName}\nTotal Income: $${this.totalIncome()}\nTotal Expenses: $${this.totalExpense()}\nAccount Balance: $${this.accountBalance()}`;
+      },
+
+      // Method to add income
+      addIncome: function(amount, description) {
+        this.incomes.push({ amount, description });
+      },
+
+      // Method to add expense
+      addExpense: function(amount, description) {
+        this.expenses.push({ amount, description });
+      },
+
+      // Method to calculate account balance
+      accountBalance: function() {
+        return this.totalIncome() - this.totalExpense();
+      }
+    };
+
+    // Example of using the personAccount object
+
+    // Log the initial account information
+    console.log(personAccount.accountInfo());
+
+    // Add a new income
+    personAccount.addIncome(300, "Bonus");
+
+    // Add a new expense
+    personAccount.addExpense(50, "Transport");
+
+    // Log the updated account information
+    console.log(personAccount.accountInfo());
+
+  </script>
+</body>
+</html>

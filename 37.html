@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid black;
+            text-align: left;
+        }
+        button {
+            color: white;
+            background-color: rgb(26, 124, 204);
+            padding: 5px 10px;
+            cursor: pointer;
+            margin: 20px;
+        }
+        .trash-icon {
+            cursor: pointer;
+            background-color: red;
+            color: white;
+            padding: 10px;
+        }
+        #action{
+            width:10%;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Table Row Management</h1>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th id="action">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be added here dynamically -->
+        </tbody>
+    </table>
+
+    <button onclick="addNewRow()">Add New</button>
+    <script>
+        // Product data for the dropdown
+        const products = [
+            { name: 'Pencil', price: 10 },
+            { name: 'Pen', price: 20 },
+            { name: 'Eraser', price: 5 },
+            { name: 'Scale', price: 30 },
+        ];
+
+        // Function to add a new row to the table
+        function addNewRow() {
+            const table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+            
+            // Create a new row
+            const newRow = document.createElement('tr');
+            
+            // Add S.n. column (auto-incremented)
+            const snCell = document.createElement('td');
+            snCell.textContent = table.rows.length + 1; // Serial number based on current rows count
+            newRow.appendChild(snCell);
+
+            // Add Product column (dropdown)
+            const productCell = document.createElement('td');
+            const productSelect = document.createElement('select');
+            products.forEach(product => {
+                const option = document.createElement('option');
+                option.value = product.name;
+                option.textContent = product.name;
+                productSelect.appendChild(option);
+            });
+            productSelect.onchange = function () {
+                updatePrice(newRow, productSelect.value);
+            };
+            productCell.appendChild(productSelect);
+            newRow.appendChild(productCell);
+
+            // Add Price column (based on the selected product)
+            const priceCell = document.createElement('td');
+            priceCell.textContent = products[0].price; // Default price
+            newRow.appendChild(priceCell);
+
+            // Add Action column with trash icon
+            const actionCell = document.createElement('td');
+            const trashIcon = document.createElement('span');
+            trashIcon.textContent = '🗑️';
+            trashIcon.classList.add('trash-icon');
+            trashIcon.onclick = function () {
+                removeRow(newRow);
+            };
+            actionCell.appendChild(trashIcon);
+            newRow.appendChild(actionCell);
+
+            // Append the new row to the table
+            table.appendChild(newRow);
+        }
+
+        // Function to update price based on selected product
+        function updatePrice(row, productName) {
+            const priceCell = row.cells[2];
+            const product = products.find(p => p.name === productName);
+            priceCell.textContent = product ? product.price : '';
+        }
+
+        // Function to remove a row from the table
+        function removeRow(row) {
+            row.parentNode.removeChild(row);
+            updateSerialNumbers(); // Recalculate serial numbers after removal
+        }
+
+        // Function to update serial numbers after deleting a row
+        function updateSerialNumbers() {
+            const rows = document.getElementById('dataTable').getElementsByTagName('tbody')[0].rows;
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].cells[0].textContent = i + 1; // Update serial number
+            }
+        }
+    </script>
+
+</body>
+</html>

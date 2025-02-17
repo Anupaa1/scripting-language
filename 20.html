@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+</head>
+<body>
+  <h1>Time Difference in Days</h1>
+  <script>
+    function getTimeDifference(startDate, endDate) {
+      const diffTime = Math.abs(new Date(endDate) - new Date(startDate));
+      return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    }
+
+    console.log(getTimeDifference('2025-01-01', '2025-01-10'));
+  </script>
+</body>
+</html>
